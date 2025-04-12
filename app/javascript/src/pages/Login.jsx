@@ -1,21 +1,22 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import authApi from "../api/auth";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const history = useHistory();
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await authApi.login({user: {email, password}});
-      toast.success(response.data.message);
+      await authApi.login({user: {email, password}});
+      toast.success("Login Success");
+      history.push("/dashboard");
     } catch (error) {
-      toast.error(error.response.data.error);
+      toast.error("Login Failed");
     }
-    
   }
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

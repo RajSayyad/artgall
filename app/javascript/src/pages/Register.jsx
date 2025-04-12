@@ -1,7 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import authApi from '../api/auth';
+import { toast } from 'react-toastify';
 
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [userName, setUserName] = useState("");
+  const history = useHistory();
+
+  const handleRegister = async (e)=>{
+    e.preventDefault();
+    try {
+      const response = await authApi.register({user: {
+        username: userName,
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation,
+      }})
+      toast.success("Registered Successfully");
+      history.push("/login")
+    } catch (error) {
+      toast.error("Something went wrong")
+    }
+  }
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -10,7 +33,7 @@ const Register = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create a new account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleRegister}>
             <div>
                 <label
                   htmlFor="email"
@@ -24,6 +47,7 @@ const Register = () => {
                   id="username"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Username"
+                  onChange={(e)=>setUserName(e.target.value)}
                   required
                 />
               </div>
@@ -40,6 +64,7 @@ const Register = () => {
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
+                  onChange={(e)=>setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -56,6 +81,7 @@ const Register = () => {
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  onChange={(e)=> setPassword(e.target.value)}
                   required
                 />
               </div>
@@ -68,10 +94,11 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
-                  id="password"
+                  name="password_confirmation"
+                  id="password_confirmation"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  onChange={(e)=> setPasswordConfirmation(e.target.value)}
                   required
                 />
               </div>
