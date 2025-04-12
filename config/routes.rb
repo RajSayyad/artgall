@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   controllers: {
     sessions: "sessions"
   }
+  get "*path", to: "home#index", via: :all
 end

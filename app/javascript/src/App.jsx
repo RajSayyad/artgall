@@ -1,9 +1,15 @@
-import React from "react"
+import React from 'react'
+import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-export default function App() {
+const App = () => {
   return (
-    <div className="text-center p-10 bg-blue-100 rounded-xl">
-      <h1 className="text-3xl font-bold text-blue-600">Hello from React + Tailwind!</h1>
-    </div>
+    <div className="text-3xl text-blue-600 font-bold text-center mt-10">
+  Tailwind is working!
+</div>
+
   )
 }
+
+export default App

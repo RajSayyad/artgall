@@ -1,7 +1,4 @@
 module.exports = {
-  content: [],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+  important: true,
+  content: ["./app/javascript/**/*.{js,jsx}", "./app/views/**/*.html.erb"],
+};
