@@ -3,6 +3,7 @@ import postApi from '../api/posts'
 import { toast } from 'react-toastify';
 import { PostCard } from '../components/post';
 import { useUser } from '../contexts/UserContext';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState(null);
@@ -30,9 +31,11 @@ const Dashboard = () => {
     )
   }
   return (
-    <div className="justify-items-center">
+    <div className="justify-items-center m-14">
       {posts.map((post, key) => (
-        <PostCard post={post} key={key} />
+        <Link to={`/post/${post.id}`} key={key}>
+          <PostCard post={post}/>
+        </Link>
       ))}
     </div>
   );

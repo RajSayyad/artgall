@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from './contexts/UserContext';
 import Navbar from './components/navbar';
-import { CreatePost } from './components/post';
+import { CreatePost, ShowPost } from './components/post';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user, loading } = useUser();
@@ -67,6 +67,7 @@ const App = () => {
           <PublicRoute path="/register" component={Register} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/post/create" component={CreatePost}/>
+          <PrivateRoute path="/post/:id" component={ShowPost}/>
           <Redirect exact from="/" to="/dashboard" />
         </Switch>
       </div>

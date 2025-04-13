@@ -16,7 +16,20 @@ class PostsController < ApplicationController
     }
   end
 
-
+  def show
+    post = Post.find(params[:id])
+    render json:
+      {
+        id: post.id,
+        title: post.title,
+        content: post.description,
+        user: {
+          id: post.user.id,
+          name: post.user.username
+        },
+        image: post.image.attached? ? url_for(post.image) : nil
+      }
+  end
 
   def create
     post = Post.new(post_params)

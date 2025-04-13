@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
   get "/current_user", to: "users#current"
-  resources :posts, only: [ :index, :create ]
+  resources :posts, only: [ :index, :create, :show ], params: :id
   devise_for :users,
   controllers: {
     sessions: "sessions"
