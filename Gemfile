@@ -14,6 +14,8 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 gem "devise"
 
+gem "pundit"
+
 # Gemfile
 gem "shakapacker"
 

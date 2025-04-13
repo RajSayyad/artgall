@@ -7,6 +7,7 @@ class PostsController < ApplicationController
         id: post.id,
         title: post.title,
         content: post.description,
+        date: post.updated_at,
         user: {
           id: post.user.id,
           name: post.user.username
@@ -23,6 +24,7 @@ class PostsController < ApplicationController
         id: post.id,
         title: post.title,
         content: post.description,
+        date: post.updated_at,
         user: {
           id: post.user.id,
           name: post.user.username
@@ -44,6 +46,34 @@ class PostsController < ApplicationController
     else
       render status: :unprocessable_entity, json: { errors: post.errors.full_messages }
     end
+  end
+
+  def update
+    post = Post.find(params[:id])
+    authorize post!
+    if post.update!(post_params)
+      render status: :ok, json: { message: "Updated Success" }
+    else
+      render status: :unprocessable_entity, json: { errors: post.errors.full_messages }
+    end
+  end
+
+  def my_posts
+    posts = current_user.posts
+    authorize Post, :my_posts?
+    render json: posts.map { |post|
+      {
+        id: post.id,
+        title: post.title,
+        content: post.description,
+        date: post.updated_at,
+        user: {
+          id: post.user.id,
+          name: post.user.username
+        },
+        image: post.image.attached? ? url_for(post.image) : nil
+      }
+    }
   end
 
 
