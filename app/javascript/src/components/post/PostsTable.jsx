@@ -1,7 +1,7 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const PostsTable = ({ posts, onEdit, onDelete }) => {
-       console.log(posts)
   return (
     <div className="overflow-x-auto m-10">
       <table className="min-w-full table-auto border-collapse border border-gray-700 bg-gray-50">
@@ -18,12 +18,13 @@ const PostsTable = ({ posts, onEdit, onDelete }) => {
               <td className="px-4 py-2">{post.title}</td>
               <td className="px-4 py-2">{new Date(post.date).toLocaleDateString()}</td>
               <td className="px-4 py-2 flex space-x-2">
-                <button
-                  onClick={() => onEdit(post.id)}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  Edit
-                </button>
+                <Link to={`/post/${post.id}/edit`}>
+                  <button
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    Edit
+                  </button>
+                </Link>
                 <button
                   onClick={() => onDelete(post.id)}
                   className="text-red-500 hover:text-red-700"

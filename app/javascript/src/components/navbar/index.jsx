@@ -5,7 +5,7 @@ import { useUser } from '../../contexts/UserContext';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Navbar = () => {
-	const {setUser} = useUser();
+	const {user, setUser} = useUser();
 	const history = useHistory();
 	const handleLogout = async (e) => {
 		e.preventDefault();
@@ -44,6 +44,14 @@ const Navbar = () => {
           >
             Logout
           </button>
+          <Link to="/profile">
+            <button
+                type="button"
+                className="text-white ml-4 bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2 text-center dark:bg-gray-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                {user.username}
+              </button>
+          </Link>
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
