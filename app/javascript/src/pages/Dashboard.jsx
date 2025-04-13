@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../contexts/UserContext';
+import { useUser } from '../contexts/UserContext';
 
 const Dashboard = () => {
-  const {user} = useContext(UserContext);
+  const {user} = useUser();
   if(!user){
        return <div>Loading</div>
   }

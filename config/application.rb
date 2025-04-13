@@ -12,7 +12,8 @@ module Artgall
     config.load_defaults 7.2
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
-    config.api_only = false
+    config.middleware.use ActionDispatch::Flash
+    config.api_only = true
 
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do

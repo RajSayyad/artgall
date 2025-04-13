@@ -1,16 +1,45 @@
-import React from 'react'
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from "./pages/Dashboard";
+import Dashboard from './pages/Dashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { UserProvider } from './contexts/UserContext';
+import { useUser } from './contexts/UserContext';
+import Navbar from './components/navbar';
 
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { user } = useUser();
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        user !=null? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  );
+};
+
+const PublicRoute = ({ component: Component, ...rest }) => {
+  const { user } = useUser();
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        !user ? <Component {...props} /> : <Redirect to="/dashboard" />
+      }
+    />
+  );
+};
 
 const App = () => {
+  const { user } = useUser();
+
   return (
     <Router>
+      {user && <Navbar />}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -20,16 +49,17 @@ const App = () => {
         draggable
         theme="dark"
       />
-
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register}/>
-        <UserProvider>
-          <Route path="/dashboard" component={Dashboard}/>
-        </UserProvider>
-      </Switch>
+      
+      <div>
+        <Switch>
+          <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/register" component={Register} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <Redirect exact from="/" to="/dashboard" />
+        </Switch>
+      </div>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
