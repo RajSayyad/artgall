@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useUser } from "../contexts/UserContext";
 
 const Login = () => {
-  const {setUser} = useUser();
+  const {login} = useUser();
   const history = useHistory();
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");
@@ -13,12 +13,16 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await authApi.login({user: {email: email, password: password}});
-      setUser(response.data.user);
-      toast.success("Login Success");
+      await authApi.logout();
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      const response = await login({user: {email: email, password: password}});
+      toast.success(response.data.message);
       history.push("/dashboard");
     } catch (error) {
-      toast.error("Login Failed");
+      toast.error(error.response.data.error[0]);
     }
   }
   return (
