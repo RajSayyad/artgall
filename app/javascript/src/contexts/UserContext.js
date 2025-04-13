@@ -11,9 +11,10 @@ export const UserProvider = ({ children }) => {
       try {
         const response = await authApi.getUser();
         setUser(response.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching user data", error);
+      }finally{
+        setLoading(false);
       }
     };
 

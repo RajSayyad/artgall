@@ -17,6 +17,9 @@ gem "devise"
 # Gemfile
 gem "shakapacker"
 
+gem "activestorage"
+
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

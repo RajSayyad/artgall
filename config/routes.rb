@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   controllers: {
     sessions: "sessions"
   }
-  get "*path", to: "home#index", via: :all
+  get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
