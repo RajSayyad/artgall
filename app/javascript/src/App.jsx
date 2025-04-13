@@ -61,7 +61,7 @@ const App = () => {
         theme="dark"
       />
       
-      <div className={`${user && "pt-28"}`}>
+      <div className={`${user && "pt-28 pb-28"}`}>
         <Switch>
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/register" component={Register} />

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import authApi from '../api/auth';
+import { toast } from 'react-toastify';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -25,8 +26,10 @@ export const UserProvider = ({ children }) => {
     try {
       const response = await authApi.login(credentials); 
       setUser(response.data.user);
+      toast.success("Login success")
       return response;
     } catch (err) {
+      toast.error("Login Failed")
       console.log(err);
     }
   };

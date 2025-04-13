@@ -19,10 +19,10 @@ const Login = () => {
     }
     try {
       const response = await login({user: {email: email, password: password}});
-      toast.success(response.data.message);
+      //toast.success("Login Success");
       history.push("/dashboard");
     } catch (error) {
-      toast.error(error.response.data.error[0]);
+      console.log(error);
     }
   }
   return (

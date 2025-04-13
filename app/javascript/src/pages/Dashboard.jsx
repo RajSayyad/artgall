@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import postApi from '../api/posts'
 import { toast } from 'react-toastify';
+import { PostCard } from '../components/post';
+import { useUser } from '../contexts/UserContext';
 
 const Dashboard = () => {
   const [posts, setPosts] = useState(null);
@@ -28,16 +30,9 @@ const Dashboard = () => {
     )
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-      {posts.map(post => (
-        <div key={post.id} className="post-card">
-          <h2>{post.title}</h2>
-          <p>{post.description}</p>
-          {post.image && (
-            <img src={post.image} className='h-max' loading="lazy"/>
-          )}
-          <p><strong>Posted by:</strong> {post.name}</p>
-        </div>
+    <div className="justify-items-center">
+      {posts.map((post, key) => (
+        <PostCard post={post} key={key} />
       ))}
     </div>
   );
