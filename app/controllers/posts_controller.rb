@@ -65,6 +65,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    authorize post
+    if post.destroy
+      render status: :ok, json: { message: "Post deleted successfully" }
+    else
+      render status: :unprocessable_entity, json: { errors: post.errors.full_messages }
+    end
+  end
+
   def my_posts
     posts = current_user.posts
     authorize Post, :my_posts?

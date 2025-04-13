@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-const PostsTable = ({ posts, onEdit, onDelete }) => {
+const PostsTable = ({ posts, onDelete }) => {
   return (
     <div className="overflow-x-auto m-10">
       <table className="min-w-full table-auto border-collapse border border-gray-700 bg-gray-50">
@@ -26,7 +26,7 @@ const PostsTable = ({ posts, onEdit, onDelete }) => {
                   </button>
                 </Link>
                 <button
-                  onClick={() => onDelete(post.id)}
+                  onClick={(e) => onDelete(e, post.id)}
                   className="text-red-500 hover:text-red-700"
                 >
                   Delete
