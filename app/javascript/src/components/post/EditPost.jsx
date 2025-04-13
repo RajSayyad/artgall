@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import postApi from '../../api/posts';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { toast } from 'react-toastify';
+import {useUser} from "../../contexts/UserContext"
 
 const EditPost = () => {
 	const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
-	const [postUser, setPostUser] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 	const [loading, setLoading] =useState(true);
+	const {user} = useUser();
 	const {id} = useParams()
   const history = useHistory();
 
@@ -47,7 +49,6 @@ const EditPost = () => {
 					width: res.data.image.naturalWidth,
 					height: res.data.image.naturalHeight
 				});
-				setPostUser(res.data.user)
 				setLoading(false)
 			} catch (error) {
 				console.log(error);
@@ -56,8 +57,22 @@ const EditPost = () => {
 		fetchPost();
 	},[])
 
-	const handleSubmit = (e)=>{
+	const handleSubmit = async (e)=>{
 		e.preventDefault();
+		try {
+			const formData = new FormData();
+      formData.append("post[title]", title);
+      formData.append("post[description]", description);
+      formData.append("post[image]", file);
+			formData.append("post[user_id]", user.id)
+
+			const response = await postApi.edit(id, formData)
+			toast.success(response.data.message);
+			history.push("/")
+		} catch (error) {
+			// toast.error(error.response.data.error[0])
+			console.log(error);
+		}
 	}
 
 	if (loading) {

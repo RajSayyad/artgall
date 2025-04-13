@@ -49,7 +49,7 @@ const CreatePost = () => {
       formData.append("post[title]", title);
       formData.append("post[description]", description);
       formData.append("post[image]", file);
-		formData.append("post[user_id]", user.id)
+			formData.append("post[user_id]", user.id)
 
       const response = await postApi.createPost(formData, {
         headers: {

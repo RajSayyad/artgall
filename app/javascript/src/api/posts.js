@@ -10,9 +10,11 @@ const createPost = (payload) => axios.post("/posts", payload,
 		}
 	});
 
-const show = (id)=> axios.get(`/posts/${id}`)
+const show = (id)=> axios.get(`/posts/${id}`);
+
+const edit = (id, payload) => axios.put(`/posts/${id}`, payload);
 
 const myPosts = ()=> axios.get("/posts/my_posts");
-const postApi = {fetch, createPost, show, myPosts};
+const postApi = {fetch, createPost, show, myPosts, edit};
 
 export default postApi;

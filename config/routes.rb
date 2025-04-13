@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
   get "/current_user", to: "users#current"
-  resources :posts, only: [ :index, :create, :show ], param: :id do
+  resources :posts, only: [ :index, :create, :show, :update ], param: :id do
     collection do
       get :my_posts
     end

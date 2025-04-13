@@ -50,7 +50,14 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    authorize post!
+    authorize post
+
+    if params[:post][:image].present?
+      post.image.purge if post.image.attached?
+
+      image = params[:post][:image].tempfile
+      post.image.attach(io: image, filename: params[:post][:image].original_filename, content_type: params[:post][:image].content_type)
+    end
     if post.update!(post_params)
       render status: :ok, json: { message: "Updated Success" }
     else
