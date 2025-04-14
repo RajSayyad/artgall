@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const PostsTable = ({ posts, onDelete }) => {
   return (
     <div className="overflow-x-auto m-10">
-      <table className="min-w-full table-auto border-collapse border border-gray-700 bg-gray-50">
+      <table className="min-w-full table-auto border-collapse border border-gray-500 bg-gray-800 text-gray-100">
         <thead>
           <tr>
             <th className="px-4 py-2 text-left border-b">Title</th>
@@ -14,7 +14,7 @@ const PostsTable = ({ posts, onDelete }) => {
         </thead>
         <tbody>
           {posts.map((post) => (
-            <tr key={post.id} className="border-b hover:bg-gray-100">
+            <tr key={post.id} className="border-b hover:bg-gray-700">
               <td className="px-4 py-2">{post.title}</td>
               <td className="px-4 py-2">{new Date(post.date).toLocaleDateString()}</td>
               <td className="px-4 py-2 flex space-x-2">

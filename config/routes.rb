@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   controllers: {
     sessions: "sessions"
   }
+  resource :pdfs, only: [ :create ] do
+    get :download
+  end
+
   get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

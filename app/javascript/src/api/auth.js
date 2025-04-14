@@ -1,12 +1,12 @@
-import axios from "./axios";
+import api from "./axios";
 
-const login = (payload) => axios.post("/users/sign_in", payload)
+const login = (payload) => api.post("/users/sign_in", payload)
 
-const register = (payload) => axios.post("/users", payload)
+const register = (payload) => api.post("/users", payload)
 
-const logout = () => axios.delete("/users/sign_out");
+const logout = () => api.delete("/users/sign_out");
 
-const getUser = () => axios.get("/current_user")
+const getUser = () => api.get("/current_user")
 
 const authApi = {login, register, logout, getUser};
 

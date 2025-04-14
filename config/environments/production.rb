@@ -88,6 +88,8 @@ Rails.application.configure do
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy
+
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

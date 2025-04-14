@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= post.title %></title>
+    <style>
+      body {
+        font-family: 'DejaVu Sans', sans-serif;
+        padding: 20px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= post.title %></h1>
+    <p><%= post.description %></p>
+
+    <% if post.image.attached? %>
+      <img src="<%= url_for(post.image, only_path: false) %>" alt="Post Image">
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+
+    <p><strong>Posted by:</strong> <%= post.user.username %></p>
+    <p><strong>Date:</strong> <%= post.created_at.strftime('%d %B %Y, %I:%M %p') %></p>
+  </body>
+</html>

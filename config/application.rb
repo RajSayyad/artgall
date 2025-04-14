@@ -2,12 +2,12 @@ require_relative "boot"
 
 require "rails/all"
 require "active_storage/engine"
+ENV["PUPPETEER_EXECUTABLE_PATH"] = "/Users/rajsayyad/Developer/myRORR_Projects/artgall/node_modules/puppeteer-core/.local-chromium/mac-1045629/chrome-mac/Chromium.app/Contents/MacOS/Chromium"
 
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
 module Artgall
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -16,6 +16,8 @@ module Artgall
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Flash
     config.api_only = true
+    config.active_job.queue_adapter = :sidekiq
+
 
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
