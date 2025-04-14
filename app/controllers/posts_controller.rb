@@ -37,7 +37,7 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
 
     if params[:post][:image].present?
-      image = params[:post][:image].tempfile # Access the image file as an IO object
+      image = params[:post][:image].tempfile
       post.image.attach(io: image, filename: params[:post][:image].original_filename, content_type: params[:post][:image].content_type)
     end
 
@@ -97,6 +97,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :user_id)  # Image is handled separately in the create method
+    params.require(:post).permit(:title, :description, :user_id)
   end
 end
