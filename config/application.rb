@@ -17,6 +17,13 @@ module Artgall
     config.middleware.use ActionDispatch::Flash
     config.api_only = true
     config.active_job.queue_adapter = :sidekiq
+    Grover.configure do |config|
+      config.options = {
+        base_url: "http://localhost:3000"
+      }
+    end
+    config.enable_local_file_access = true
+
 
 
 

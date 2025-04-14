@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     get :download
   end
 
+  direct :rails_blob do |blob|
+    route_for(:rails_service_blob, blob.signed_id, blob.filename)
+  end
+
   get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
