@@ -35,7 +35,7 @@ const ShowPost = () => {
         className="w-full h-80 object-cover rounded-xl shadow mb-6"
       />
       <div className="prose prose-lg max-w-none  text-gray-900 dark:text-gray-50">
-        <p>{post.content}</p>
+        <p className='whitespace-pre-wrap'>{post.content}</p>
       </div>
     </div>
   );
