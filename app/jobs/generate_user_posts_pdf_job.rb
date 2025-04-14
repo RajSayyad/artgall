@@ -14,7 +14,7 @@ class GenerateUserPostsPdfJob
         layout: false
       )
       html = html.encode("UTF-8")
-      pdf_file = Grover.new(html, format: "A4", encoding: "UTF-8").to_pdf
+      pdf_file = Grover.new(html, encoding: "UTF-8", margin_top: "100px", margin_bottom: "100px").to_pdf
       combined_pdf << CombinePDF.parse(pdf_file)
     end
 
